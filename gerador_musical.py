@@ -3,7 +3,7 @@ from nota import Nota
 from instrumento import Instrumento
 
 class GeradorMusical:
-    def __init__(self, texto):
+    def __init__(self, texto, bpm=120):
         self.texto = texto
         self.midi = MIDIFile(1)
         self.tempo = 120
