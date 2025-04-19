@@ -1,0 +1,2 @@
+pip install pygame MIDIUtil
+pip freeze > requirements.txt
