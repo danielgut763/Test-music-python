@@ -30,20 +30,11 @@ class GeradorMusical:
                 self.midi.addNote(0, self.canal, nota, self.nota_atual, 1, self.volume)
                 self.ultima_nota = nota
                 self.nota_atual += 1
-
-            elif testa_se_pausa(nota):
-                self.nota_atual += 1
-
-            elif testa_se_aumenta_volume(nota):
-                self.volume = min(127, self.volume * 2)
-
-            elif testa_se_novo_instrumento(nota):
-                novo_instr = self.instrumento.trocar(nota, self.instrumento.valor)
-                self.midi.addProgramChange(0, self.canal, self.nota_atual, novo_instr)
-
-            elif testa_se_sobe_oitava(nota):
-                self.oitava = self.oitava + 12 if self.oitava + 12 <= 127 else 0
-
+                testa_se_pausa(nota, self.nota_atual)
+                testa_se_aumenta_volume(nota, self.volume)
+                testa_se_novo_instrumento(nota, self.instrumento, self.midi, self.canal, self.nota_atual)
+                testa_se_sobe_oitava(nota, self.oitava)
+                
             else:
                 if self.ultima_nota:
                     self.midi.addNote(0, self.canal, self.ultima_nota, self.nota_atual, 1, self.volume)

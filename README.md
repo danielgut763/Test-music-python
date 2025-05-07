@@ -44,6 +44,7 @@ pip install -r requirements.txt
 ```bash
 pip install pygame MIDIUtil
 pip freeze > requirements.txt
+export PYTHONPATH=/workspaces/Test-music-python:$PYTHONPATH
 ```
 
 ---
