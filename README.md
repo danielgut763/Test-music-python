@@ -97,15 +97,3 @@ Como ambientes remotos não suportam áudio nem interface gráfica, use **apenas
 E E a E a C E G a G a
 G A G F E C E A B H A
 ```
-
-## 📁 Estrutura do Projeto
-
-```
-gerador_musica/
-├── main.py                   # Interface gráfica (não roda em Codespaces)
-├── gerar_musica_simples.py  # Versão terminal para geração do .mid
-├── nota.py                  # Classe Nota
-├── instrumento.py           # Classe Instrumento
-├── gerador_musical.py       # Classe principal de processamento
-├── requirements.txt         # Dependências do projeto
-```
