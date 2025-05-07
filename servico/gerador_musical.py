@@ -1,10 +1,11 @@
 from midiutil import MIDIFile
-from FuncoesQueTestamCaracter.testaSeAumentaVolume import testa_se_aumenta_volume
-from FuncoesQueTestamCaracter.testaSePausa import testa_se_pausa
-from FuncoesQueTestamCaracter.testaSeNovoInstrumento import testa_se_novo_instrumento
-from FuncoesQueTestamCaracter.testaSeSobeOitava import testa_se_sobe_oitava
-from nota import Nota
-from instrumento import Instrumento
+
+from musicaClasses.instrumento import Instrumento
+from musicaClasses.nota import Nota
+from servico.FuncoesQueTestamCaracter.testaSeAumentaVolume import testa_se_aumenta_volume
+from servico.FuncoesQueTestamCaracter.testaSeNovoInstrumento import testa_se_novo_instrumento
+from servico.FuncoesQueTestamCaracter.testaSePausa import testa_se_pausa
+from servico.FuncoesQueTestamCaracter.testaSeSobeOitava import testa_se_sobe_oitava
 
 class GeradorMusical:
     def __init__(self, texto, bpm):
