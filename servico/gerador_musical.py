@@ -3,6 +3,7 @@ from midiutil import MIDIFile
 from musicaClasses.instrumento import Instrumento
 from musicaClasses.nota import Nota
 from servico.FuncoesQueTestamCaracter.testaSeAumentaVolume import testa_se_aumenta_volume
+from servico.FuncoesQueTestamCaracter.testaSeFim import testa_se_fim
 from servico.FuncoesQueTestamCaracter.testaSeNovoInstrumento import testa_se_novo_instrumento
 from servico.FuncoesQueTestamCaracter.testaSePausa import testa_se_pausa
 from servico.FuncoesQueTestamCaracter.testaSeSobeOitava import testa_se_sobe_oitava
@@ -19,6 +20,7 @@ class GeradorMusical:
         self.nota_atual = 0
         self.ultima_nota = None
 
+        # Definindo o instrumento inicial e o tempo
         self.midi.addTempo(0, 0, self.tempo)
         self.midi.addProgramChange(0, self.canal, 0, self.instrumento.valor)
 
@@ -36,10 +38,7 @@ class GeradorMusical:
                 testa_se_sobe_oitava(nota, self.oitava)
                 
             else:
-                if self.ultima_nota:
-                    self.midi.addNote(0, self.canal, self.ultima_nota, self.nota_atual, 1, self.volume)
-                else:
-                    self.nota_atual += 1
+                testa_se_fim(self.nota_atual, self.midi, self.canal, self.ultima_nota, self.volume)
 
     def salvar_arquivo(self, nome="musica_gerada.mid"):
         with open(nome, "wb") as f:
