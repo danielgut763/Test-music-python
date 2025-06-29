@@ -1,5 +1,7 @@
 from padrao_MIDI import *
 
+# Define um instrumento
+# Permite obter seu valor MIDI e trocar para um novo instrumento
 class Instrumento:
     def __init__(self, codigo):
         self.codigo = codigo
