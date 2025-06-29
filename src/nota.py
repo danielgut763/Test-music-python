@@ -1,5 +1,4 @@
-# Definido no padrão midi
-VALOR_MIDI_MAXIMO = 127
+from padrao_MIDI import *
 
 class Nota:
     mapa = {

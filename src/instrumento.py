@@ -1,25 +1,13 @@
-class Instrumento:
-    def __init__(self, valor):
-        self.valor = valor
+from padrao_MIDI import *
 
-    def trocar(self, caractere, instrumento_anterior=None):
-        if caractere == '!':
-            self.valor = 24
-        elif caractere in 'oOiIuU':
-            self.valor = 110
-        elif caractere == '\n':
-            self.valor = 123
-        elif caractere == ';':
-            self.valor = 15
-        elif caractere == ',':
-            self.valor = 114
-        elif caractere.isdigit():
-            digito = int(caractere)
-            if digito % 2 == 0:
-                if instrumento_anterior is not None:
-                    self.valor = instrumento_anterior.valor + digito
-                else:
-                    return None
-            else:
-                self.valor = 15
-        return self.valor
+class Instrumento:
+    def __init__(self, codigo):
+        self.codigo = codigo
+
+    def obter_valor_midi(self):
+        return self.codigo
+
+    def trocar(self):
+        self.codigo += 1
+        if self.codigo > INSTRUMENTO_MAXIMO:
+            self.codigo = INSTRUMENTO_MINIMO

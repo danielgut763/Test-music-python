@@ -2,29 +2,22 @@ from midiutil import MIDIFile
 
 from instrumento import Instrumento
 from nota import Nota
+from padrao_MIDI import *
 from random import randint
 
-# Canal e faixa de MIDI em que a música vai tocar
+# Canal e faixa de MIDI escolhidas para tocar a música
 CANAL = 0
 FAIXA = 0
 
-# Duração de cada nota mapeada de um caractere do texto
+# Duração escolhida para cada nota mapeada de um caractere do texto
 DURACAO_NOTAS = 1
 
-# Definidos pelo padrão MIDI
-INSTRUMENTO_MINIMO = 0
-INSTRUMENTO_MAXIMO = 127
-OITAVA_MINIMA = -2
-OITAVA_MAXIMA = 8
-VOLUME_MAXIMO = 127
-
-# Limite para o valor de BPM
+# Limites escolhidos para o valor de BPM
 BPM_MINIMO = 40
 BPM_MAXIMO = 240
 
-# Definições para o som de telefone
-TELEFONE_TOCANDO_INSTRUMENTO = 125
-TELEFONE_TOCANDO_NOTA = "A"
+# Nota escolhida para tocar o som de telefone
+TELEFONE_TOCANDO_NOTA = 'A'
 
 class Musica:
     # Gera a musica a partir de um texto, um BPM inicial, um instrumento inicial, uma oitava inicial e um volume inicial
@@ -40,7 +33,7 @@ class Musica:
 
         # Define o instrumento inicial e o tempo no início da música (tempo 0)
         self.midi.addTempo(FAIXA, 0, bpm_atual)
-        self.midi.addProgramChange(FAIXA, CANAL, 0, instrumento_atual)
+        self.midi.addProgramChange(FAIXA, CANAL, 0, instrumento_atual.obter_valor_midi())
 
         for (posicao, caractere) in enumerate(texto):
             nota_atual = None
@@ -77,17 +70,16 @@ class Musica:
                     self.midi.addNote(FAIXA, CANAL, nota_anterior.obter_valor_midi(), tempo_atual, DURACAO_NOTAS, volume_atual)
                     tempo_atual += 1
                 else:
-                    self.midi.addProgramChange(FAIXA, CANAL, tempo_atual, TELEFONE_TOCANDO_INSTRUMENTO)
+                    self.midi.addProgramChange(FAIXA, CANAL, tempo_atual, Instrumento(CODIGO_INSTRUMENTO_TELEFONE_TOCANDO).obter_valor_midi())
                     self.midi.addNote(FAIXA, CANAL, Nota(TELEFONE_TOCANDO_NOTA, oitava_atual).obter_valor_midi(), tempo_atual, DURACAO_NOTAS, volume_atual)
                     tempo_atual += 1
-                    self.midi.addProgramChange(FAIXA, CANAL, tempo_atual, instrumento_atual)
+                    self.midi.addProgramChange(FAIXA, CANAL, tempo_atual, instrumento_atual.obter_valor_midi())
             elif caractere == '?':
-                nota_escolhica = ['A', 'B', 'C', 'D', 'E', 'F', 'G'][randint(0, 6)]
-                self.midi.addNote(FAIXA, CANAL, Nota(nota_escolhica, oitava_atual).obter_valor_midi(), tempo_atual, DURACAO_NOTAS, volume_atual)
+                nota_escolhida = ['A', 'B', 'C', 'D', 'E', 'F', 'G'][randint(0, 6)]
+                self.midi.addNote(FAIXA, CANAL, Nota(nota_escolhida, oitava_atual).obter_valor_midi(), tempo_atual, DURACAO_NOTAS, volume_atual)
             elif caractere == '\n':
-                instrumento_atual += 1
-                if instrumento_atual > INSTRUMENTO_MAXIMO:
-                    instrumento_atual = INSTRUMENTO_MINIMO
+                instrumento_atual.troca()
+                self.midi.addProgramChange(FAIXA, CANAL, tempo_atual, instrumento_atual.obter_valor_midi())
             elif caractere == ';':
                 bpm_atual = randint(BPM_MINIMO, BPM_MAXIMO)
                 self.midi.addTempo(FAIXA, tempo_atual, bpm_atual)

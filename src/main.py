@@ -1,10 +1,11 @@
 from musica import Musica
+from instrumento import Instrumento
 
 # texto = open("doremifa.txt").read()
 texto = open("halloween.txt").read()
 # texto = input("Digite o texto para transformar em música:\n")
 bpm_inicial_input = input("Digite o BPM inicial desejado (padrão = 120): ")
-instrumento_inicial_input = input("Digite o código do instrumento inicial desejado (padrão = 1, Acoustic Grand Piano): ")
+codigo_instrumento_inicial_input = input("Digite o código do instrumento inicial desejado (padrão = 1, Acoustic Grand Piano): ")
 oitava_inicial_input = input("Digite a oitava inicial desejada (padrão = 3): ")
 volume_inicial_input = input("Digite o volume inicial desejado (padrão = 100): ")
 
@@ -15,9 +16,10 @@ except ValueError:
     bpm_inicial = 120  # fallback caso digitem errado
 
 try:
-    instrumento_inicial = int(instrumento_inicial_input)
+    codigo_instrumento_inicial = int(codigo_instrumento_inicial_input)
 except ValueError:
-    instrumento_inicial = 1 # fallback caso digitem errado
+    codigo_instrumento_inicial = 1 # fallback caso digitem errado
+instrumento_inicial = Instrumento(codigo_instrumento_inicial)
 
 try:
     oitava_inicial = int(oitava_inicial_input)
