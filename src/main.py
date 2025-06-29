@@ -1,6 +1,8 @@
 from musica import Musica
 
-texto = input("Digite o texto para transformar em música:\n")
+# texto = open("doremifa.txt").read()
+texto = open("halloween.txt").read()
+# texto = input("Digite o texto para transformar em música:\n")
 bpm_inicial_input = input("Digite o BPM inicial desejado (padrão = 120): ")
 instrumento_inicial_input = input("Digite o código do instrumento inicial desejado (padrão = 1, Acoustic Grand Piano): ")
 oitava_inicial_input = input("Digite a oitava inicial desejada (padrão = 3): ")

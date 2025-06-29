@@ -3,9 +3,13 @@ VALOR_MIDI_MAXIMO = 127
 
 class Nota:
     mapa = {
-        'A': 9, 'B': 11, 'C': 0,
-        'D': 2, 'E': 4, 'F': 5,
-        'G': 7, 'H': 10
+        'A':  9, 'a':  9, 
+        'B': 11, 'b': 11, 
+        'C':  0, 'c':  0,
+        'D':  2, 'd':  2, 
+        'E':  4, 'e':  4, 
+        'F':  5, 'f':  5,
+        'G':  7, 'g':  7
     }
 
     def __init__(self, caractere, oitava):
