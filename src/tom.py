@@ -9,6 +9,6 @@ class Tom:
     def obter_valor_midi(self):
         tom = self.nota + 12*(self.oitava+2)
         if tom > TOM_MAXIMO:
-            return None
+            raise ValueError("Tom inválido")
         else:
             return tom
